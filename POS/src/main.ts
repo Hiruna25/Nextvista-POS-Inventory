@@ -1,0 +1,18 @@
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import './style.css'
+import App from './App.vue'
+import router from './router'
+import { useAuthStore } from '@/stores/auth'
+
+const app = createApp(App)
+
+app.use(createPinia())
+
+// Initialize authentication from localStorage before routing
+const authStore = useAuthStore()
+authStore.initializeAuth()
+
+app.use(router)
+
+app.mount('#app')
